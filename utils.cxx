@@ -4,8 +4,63 @@
 
 #include "utils.h"
 
-void chiffre(string plain,int t, mpz_t n,  mpz_t b){
+string ECB(const string & data, int blocksize, int p){
+    string out = "";
+    out += data.substr(p, blocksize+1);
+    return out;
+}
 
+int letterToASCII(char x)
+{
+    return (int)x;
+}
+
+unsigned long int wordToNumber(string block){
+    int t;
+    unsigned long int res;
+    t = block.length();
+
+    stringstream oss;
+
+    for (unsigned int i = 0; i < t-1; i++)
+    {
+        oss << letterToASCII(block[i]);
+        //cout << letterToASCII(block[i]) << endl;
+    }
+
+    istringstream iss(oss.str());
+    iss >> res;
+
+    return res;
+}
+
+
+void chiffre(int t, const mpz_t n, const mpz_t b){
+    int bytes = t / 8 ;
+
+    char block[bytes];
+    int bytes_read = 0;
+    int block_read = 0;
+    int c_read;
+    mpz_t clair, crypte;
+    mpz_init(clair);
+    mpz_init(crypte);
+
+    while (!cin.eof())
+    {
+        cin.read(block,bytes);
+        c_read = cin.gcount();
+        memset(block,0,bytes-c_read);
+        mpz_import(clair, bytes, 1, sizeof(block[0]), 0, 0, block);
+
+        mpz_powm(crypte,clair,b,n);
+        gmp_printf("%Zd\n",crypte);
+
+        bytes_read += c_read;
+        ++block_read;
+    }
+    cout << "# "<< bytes_read << " bytes read, " <<  block_read << " blocs read." << endl;
+    mpz_clears(clair, crypte, NULL);
 }
 
 vector<string> tokenizer( const string& p_pcstStr, char delim )  {

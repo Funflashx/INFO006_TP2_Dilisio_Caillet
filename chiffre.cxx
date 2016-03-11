@@ -11,11 +11,10 @@ int main( int argc, char * argv [] )
     if (argc != 2){
         cout << "usage: " << argv[0] << "[-p][name]" << endl;
         cout << "\t [name].pub " << endl;
-        cout << "\t if -p so .my_rsa_keys/[name].pub" << endl;
         exit(1);
     }
 
-    string clair = readInput( cin );
+    //string clair = readInput( cin );
 
     string line = "";
     string name = argv[1];
@@ -28,23 +27,21 @@ int main( int argc, char * argv [] )
     mpz_init(b);
 
     ifstream keypub(filename);
-    if (keypub.is_open())
-    {
-        getline (keypub, line);
-        x = tokenizer(line, ' ');
-        t = atoi(x[0].c_str());
-        mpz_set_str(n,x[1].c_str(),10);
-        mpz_set_str(b,x[2].c_str(),10);
+    if (!keypub.is_open()) {
+        cerr << "Unable to open file";
+        exit(1);
+    }
+    getline (keypub, line);
+    x = tokenizer(line, ' ');
+    t = atoi(x[0].c_str());
+    mpz_set_str(n,x[1].c_str(),10);
+    mpz_set_str(b,x[2].c_str(),10);
 
-        keypub.close();
-    } else cerr << "Unable to open file";
+    keypub.close();
 
+    chiffre(t,n,b);
 
-
-    gmp_printf("N = %Zd\nB = %Zd\n",n,b);
-    chiffre(clair,t,n,b);
-
-    mpz_clears(n,b);
+    mpz_clears(n,b,NULL);
 
     return 0;
 }
