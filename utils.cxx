@@ -4,6 +4,33 @@
 
 #include "utils.h"
 
+void chiffre(string plain,int t, mpz_t n,  mpz_t b){
+
+}
+
+vector<string> tokenizer( const string& p_pcstStr, char delim )  {
+    vector<string> tokens;
+    stringstream   mySstream( p_pcstStr );
+    string         temp;
+
+    while( getline( mySstream, temp, delim ) ) {
+        tokens.push_back( temp );
+    }
+
+    return tokens;
+}
+
+string readInput( istream & in )
+{
+    ostringstream s( ostringstream::out );
+    while ( in.good() )
+    {
+        char c;
+        in >> c;
+        s << c;
+    }
+    return s.str();
+}
 
 void find_prime_number(int t, gmp_randstate_t r_state, mpz_t n){ //n est le result
     int reps = 0;

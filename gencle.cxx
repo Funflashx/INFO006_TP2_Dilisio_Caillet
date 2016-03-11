@@ -23,8 +23,8 @@ int main( int argc, char ** argv ) {
 
     mpz_t p, q, n, b, phy_n, p2, q2, a, ab, r;
     unsigned long int seed;
-    int taille = atoi(argv[1]);
-    string name = argv[2];
+    int taille = atoi(argv[2]);
+    string name = argv[1];
 
 
     gmp_randstate_t r_state;
@@ -50,8 +50,8 @@ int main( int argc, char ** argv ) {
     mpz_init(r);
 
     //Cherche p et q, deux nombres premiers distincts
-    utils::find_prime_number((taille/2)+16,r_state,p);
-    utils::find_prime_number((taille/2)+16,r_state,q);
+    find_prime_number((taille/2)+16,r_state,p);
+    find_prime_number((taille/2)+16,r_state,q);
 
     cout << "# p,q pair generated. public n is" << endl;
     // n = p*q
@@ -65,7 +65,7 @@ int main( int argc, char ** argv ) {
     //(p-1)(q-1)
     mpz_mul (phy_n, p2, q2);
 
-    utils::random_e(phy_n,taille+32,r_state,a);
+    random_e(phy_n,taille+32,r_state,a);
     mpz_invert(b,a,phy_n);
     cout << "# a,b pair generated. public b is" << endl;
     gmp_printf("%Zd\n", b);
@@ -79,7 +79,7 @@ int main( int argc, char ** argv ) {
         if (keypriv.is_open()){
             keypriv << taille << " " << n << " " << p << " " << q << " " << a << " " << b << "\n";
             string recap = "# Public/private RSA keys: t n p q a b\n";
-            keypriv << recap;
+            keypriv << recap << "\n";
             keypriv.close();
             chmod (filename_priv.c_str(), S_IRUSR | S_IWUSR);
             cout << "# OK : paire de cle stockee dans " << filename_priv << "\n" << endl;
@@ -88,11 +88,12 @@ int main( int argc, char ** argv ) {
         string filename_pub = name + ".pub";
         ofstream keypub(filename_pub.c_str(), ios::out | ios::trunc );
         if (keypub.is_open()){
+            string recap = "# Public RSA keys: t n b";
             keypub << taille << " " << n << " " << b << "\n";
+            keypub << recap << "\n";
             keypub.close();
             cout << "##########PUBLIC KEY##########" << endl;
             cout << taille << " " << n << " " << b << endl;
-            string recap = "# Public RSA keys: t n b";
             cout << recap << endl;
         }else cerr << "This file cannot be create" << endl;
 
