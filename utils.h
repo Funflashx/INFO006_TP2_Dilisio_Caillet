@@ -34,5 +34,6 @@ void random_e(mpz_t phy, int t, gmp_randstate_t r_state, mpz_t e);
 void gencle(string name, int t);
 
 void chiffre(int t,const mpz_t n,const  mpz_t b);
+string dechiffre(int t, const mpz_t a,const mpz_t n);
 
 #endif //UTILS_H

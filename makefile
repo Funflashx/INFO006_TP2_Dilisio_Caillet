@@ -9,7 +9,7 @@ SRCXX=utils.cxx
 # Vos executables C, par exemple : EXEC=progc
 EXEC=
 # Vos executables C++, par exemple : EXECXX=progcxx
-EXECXX=gencle chiffre
+EXECXX=gencle chiffre dechiffre
 
 ####################################################
 # ne pas toucher
@@ -39,6 +39,10 @@ gencle: $(OBJXX) gencle.cxx
 	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
 
 chiffre: $(OBJXX) chiffre.cxx
+	$(CXX) -c $(INCDIR) $@.cxx
+	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
+
+dechiffre: $(OBJXX) dechiffre.cxx
 	$(CXX) -c $(INCDIR) $@.cxx
 	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
 

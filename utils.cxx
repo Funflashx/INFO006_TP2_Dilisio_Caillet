@@ -4,6 +4,37 @@
 
 #include "utils.h"
 
+string dechiffre(int t, const mpz_t a,const mpz_t n){
+
+
+    int bytes = t / 8 ;
+    string line = "";
+    char block[bytes];
+    mpz_t clair;
+    mpz_t crypte;
+    mpz_init(clair);
+    mpz_init(crypte);
+
+    string clair_str = "";
+    while ( getline(cin,line))
+    {
+        if (line[0] != '#')
+        {
+            mpz_set_str(crypte,line.c_str(),10);
+            mpz_powm(clair,crypte,a,n);
+            mpz_export (block, NULL, 0, sizeof block, 0, 0,clair);
+
+            for (int i = bytes-1; i >= 0 ; --i)
+            {
+                clair_str += block[i];
+            }
+        }
+    }
+    mpz_clears(clair,crypte,NULL);
+    return clair_str;
+
+}
+
 string ECB(const string & data, int blocksize, int p){
     string out = "";
     out += data.substr(p, blocksize+1);
@@ -17,7 +48,7 @@ int letterToASCII(char x)
 
 unsigned long int wordToNumber(string block){
     int t;
-    unsigned long int res;
+    unsigned long int clair;
     t = block.length();
 
     stringstream oss;
@@ -25,13 +56,12 @@ unsigned long int wordToNumber(string block){
     for (unsigned int i = 0; i < t-1; i++)
     {
         oss << letterToASCII(block[i]);
-        //cout << letterToASCII(block[i]) << endl;
     }
 
     istringstream iss(oss.str());
-    iss >> res;
+    iss >> clair;
 
-    return res;
+    return clair;
 }
 
 
@@ -87,7 +117,7 @@ string readInput( istream & in )
     return s.str();
 }
 
-void find_prime_number(int t, gmp_randstate_t r_state, mpz_t n){ //n est le result
+void find_prime_number(int t, gmp_randstate_t r_state, mpz_t n){ //n est le block
     int reps = 0;
 
 /**

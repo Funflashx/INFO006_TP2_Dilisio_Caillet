@@ -9,7 +9,7 @@ int main( int argc, char * argv [] )
 {
 
     if (argc != 2){
-        cout << "usage: " << argv[0] << "[-p][name]" << endl;
+        cout << "usage: " << argv[0] << "[name]" << endl;
         cout << "\t [name].pub " << endl;
         exit(1);
     }
