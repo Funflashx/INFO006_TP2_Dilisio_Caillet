@@ -6,10 +6,7 @@
 //  Copyright © 2016 François Caillet. All rights reserved.
 //
 
-#include <iostream>
 #include "utils.h"
-#include <gmp.h>
-#include <gmpxx.h>
 
 struct timeval tv;
 
