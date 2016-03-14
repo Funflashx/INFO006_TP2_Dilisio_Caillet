@@ -4,6 +4,12 @@
 
 #include "utils.h"
 
+
+void HashMD5(unsigned char* pPlain, int nPlainLen, unsigned char* pHash)
+{
+    MD5(pPlain, nPlainLen, pHash);
+}
+
 string dechiffre(int t, const mpz_t a,const mpz_t n){
 
 
@@ -27,6 +33,7 @@ string dechiffre(int t, const mpz_t a,const mpz_t n){
             for (int i = bytes-1; i >= 0 ; --i)
             {
                 clair_str += block[i];
+                cout << block[i] << endl;
             }
         }
     }

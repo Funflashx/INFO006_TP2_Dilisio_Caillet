@@ -9,7 +9,7 @@ SRCXX=utils.cxx
 # Vos executables C, par exemple : EXEC=progc
 EXEC=
 # Vos executables C++, par exemple : EXECXX=progcxx
-EXECXX=gencle chiffre dechiffre
+EXECXX=gencle chiffre dechiffre signe verifie
 
 ####################################################
 # ne pas toucher
@@ -21,7 +21,7 @@ LIBSXX=-lgmpxx -lgmp
 CC=gcc -g -c
 CXX=g++ -g -Wall -c
 LD=gcc -Xlinker -rpath -Xlinker ${RUNTIMELIB}
-LDXX=g++ -Xlinker -rpath -Xlinker ${RUNTIMELIB}
+LDXX=g++ -Xlinker -rpath -Xlinker ${RUNTIMELIB} -lssl -lcrypto
 OBJ=${SRC:.c=.o}
 OBJXX=${SRCXX:.cxx=.o}
 
@@ -46,6 +46,13 @@ dechiffre: $(OBJXX) dechiffre.cxx
 	$(CXX) -c $(INCDIR) $@.cxx
 	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
 
+signe: $(OBJXX) signe.cxx
+	$(CXX) -c $(INCDIR) $@.cxx
+	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
+
+verifie: $(OBJXX) verifie.cxx
+	$(CXX) -c $(INCDIR) $@.cxx
+	$(LDXX) $@.o $(OBJXX) $(LIBDIR) $(LIBSXX) -o $@
 
 clean:
 	rm -f $(EXEC) $(EXEC:=.o) $(EXECXX) $(EXECXX:=.o) $(OBJ) $(OBJXX)

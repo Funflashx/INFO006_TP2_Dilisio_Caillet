@@ -7,6 +7,7 @@
 #include <utility>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/time.h>
 #include <time.h>
 #include <gmp.h>
@@ -16,6 +17,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <openssl/md5.h>
 
 
 #ifndef utils
@@ -35,5 +37,7 @@ void gencle(string name, int t);
 
 void chiffre(int t,const mpz_t n,const  mpz_t b);
 string dechiffre(int t, const mpz_t a,const mpz_t n);
+
+void HashMD5(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
 
 #endif //UTILS_H
