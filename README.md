@@ -15,8 +15,6 @@ Cryptosystème à clé publique RSA (version simplifiée)
 - [x] verifie [fichier-signature] : vérifie que le fichier-signature est bien la signature du message donné sur l'entrée standard pour l'émetteur [nom]. 
 - [ ] fonction d'inverse modulaire , Non fonctionnel 
 ```c++
-        cout << "#######################TEST###########################" << endl;
-    
         mpz_t _N, _M, _RESULT;
         mpz_init(_N);
         mpz_init(_M);
@@ -25,8 +23,6 @@ Cryptosystème à clé publique RSA (version simplifiée)
         mpz_init(_RESULT);
         inverse_modulaire(_N,_M,_RESULT); //util.h
         gmp_printf("INVERSE DE N MODULO M = %Zd\n", _RESULT);
-    
-        cout << "#######################TEST###########################" << endl;
     
         NON FONCTIONNEL ...
         Algorithme suivie :
