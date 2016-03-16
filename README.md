@@ -24,19 +24,18 @@ Cryptosystème à clé publique RSA (version simplifiée)
         inverse_modulaire(_N,_M,_RESULT); //util.h
         gmp_printf("INVERSE DE N MODULO M = %Zd\n", _RESULT);
     
-        NON FONCTIONNEL ...
-        Algorithme suivie :
-                    def inverseModulaire(a, n):
-                        return bezoutRec(a,n)[0]+n
-    
-                    def bezoutRec(a, b):
-                        if ( a% b == 0):
-                            return (0,1)
-                        else:
-                            r,q = a%b, a//b
-                            u, v = bezoutRec(b, r)
-                            return (v, u-v*q)
-                            
+//        NON FONCTIONNEL ...
+//        Algorithme suivie :
+//                    def inverseModulaire(a, n):
+//                        return bezoutRec(a,n)[0]+n
+//    
+//                    def bezoutRec(a, b):
+//                        if ( a% b == 0):
+//                            return (0,1)
+//                        else:
+//                            r,q = a%b, a//b
+//                            u, v = bezoutRec(b, r)
+//                            return (v, u-v*q)                            
 ```
 
 ##Utilisation 
