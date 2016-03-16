@@ -33,7 +33,7 @@ string dechiffre(int t, const mpz_t a,const mpz_t n){
             for (int i = bytes-1; i >= 0 ; --i)
             {
                 clair_str += block[i];
-                cout << block[i] << endl;
+                //cout << block[i] << endl;
             }
         }
     }
@@ -133,10 +133,13 @@ void find_prime_number(int t, gmp_randstate_t r_state, mpz_t n){ //n est le bloc
  * reps = 0     if n is definitly composite. There should be it.
  * **/
 
+
     do {
         mpz_urandomb(n, r_state, t);
 
-    }while (!mpz_probab_prime_p ( n, reps ));//C'est probablement un prime
+    } while (!mpz_probab_prime_p(n, reps));//C'est probablement un prime
+
+
 }
 
 

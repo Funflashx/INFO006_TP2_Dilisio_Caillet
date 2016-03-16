@@ -10,6 +10,13 @@
 
 struct timeval tv;
 
+//How to : ./gencle fc_1024 1024 (could fail restart anyway)
+
+//NOTE:
+//  * -rw------- [name].priv; sudo user permission
+//  * Keys will be saved in current directory
+//  * Program may failed (check a*b=1 mod phi(n)), restart until it works
+
 int main( int argc, char ** argv ) {
 
     if (argc != 3) {

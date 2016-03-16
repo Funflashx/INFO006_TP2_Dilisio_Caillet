@@ -4,6 +4,8 @@
 
 #include "utils.h"
 
+//How to :  cat message.chiffre | ./dechiffre fc_XXX
+// OR : cat message.txt | ./chiffre fc_XXX | ./dechiffre fc_XXX
 
 int main( int argc, char * argv [] ) {
 

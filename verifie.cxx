@@ -7,7 +7,7 @@
 
 int main( int argc, char ** argv ) {
 
-    if (argc != 3) {
+    if (argc != 2) {
         cout << "usage: " << argv[0] << "[nom] [fichier-signature]" << endl;
         cout << "\t [name] -- [nom].pub" << endl;
         cout << "\t [fichier-signature] -- ficher à vérifier" << endl;
@@ -16,5 +16,7 @@ int main( int argc, char ** argv ) {
 
     string name = argv[1];
     string filename = name + ".pub";
+    string message = readInput(cin);
+
 
 }
