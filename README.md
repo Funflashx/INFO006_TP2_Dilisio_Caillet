@@ -23,7 +23,7 @@ Cryptosystème à clé publique RSA (version simplifiée)
         mpz_set_ui(_N,109);
         mpz_set_ui(_M,4567);
         mpz_init(_RESULT);
-        inverse_modulaire(_N,_M,_RESULT);
+        inverse_modulaire(_N,_M,_RESULT); //util.h
         gmp_printf("INVERSE DE N MODULO M = %Zd\n", _RESULT);
     
         cout << "#######################TEST###########################" << endl;
@@ -40,6 +40,7 @@ Cryptosystème à clé publique RSA (version simplifiée)
                             r,q = a%b, a//b
                             u, v = bezoutRec(b, r)
                             return (v, u-v*q)
+                            
 ```
 
 ##Utilisation 
