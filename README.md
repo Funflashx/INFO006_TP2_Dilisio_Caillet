@@ -7,6 +7,11 @@ Cryptosystème à clé publique RSA (version simplifiée)
    make 
  ```
  
+##Dependances
+- GMP
+- OpenSSL
+
+ 
 ##Réalisation
 - [x] gencle [nom] [t] : génère une paire de clé pour des blocs de taille [t] et les sauve dans les fichiers [nom].pub et [nom].priv
 - [x] chiffre [nom] : chiffre le message sur l'entrée standard pour le destinataire de clé [nom].pub et sort le message chiffré sur la sortie standard
