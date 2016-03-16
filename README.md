@@ -139,8 +139,8 @@ echo -n hello | ./signe fc_XXX | ./chiffre fc_XXX >> empreinte.chiffre
 ###./verifie
 ```bash
 usage: ./verifie[fichier]
-         [fichier] -- ficher pour comparer (le clair)
-         prend en entrée standard le chiffré de l'empreinte
+         [fichier] -- ficher pour comparer (le clair, l'empreinte)
+         prend en entrée standard le dechiffré donc l'autre empreinte
 ```
 
 ```
