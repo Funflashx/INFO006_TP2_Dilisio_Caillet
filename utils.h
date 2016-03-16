@@ -40,4 +40,8 @@ string dechiffre(int t, const mpz_t a,const mpz_t n);
 
 void HashMD5(unsigned char* pPlain, int nPlainLen, unsigned char* pHash);
 
+void bezout_rec(mpz_t a, mpz_t b, Valeur returned);
+void inverse_modulaire(mpz_t a, mpz_t n, mpz_t returned);
+
+
 #endif //UTILS_H

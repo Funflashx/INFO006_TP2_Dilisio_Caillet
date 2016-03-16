@@ -91,7 +91,9 @@ void chiffre(int t, const mpz_t n, const mpz_t b){
         mpz_import(clair, bytes, 1, sizeof(block[0]), 0, 0, block);
 
         mpz_powm(crypte,clair,b,n);
-        gmp_printf("%Zd\n",crypte);
+        if(mpz_cmp_ui(crypte,0) != 0) {
+            gmp_printf("%Zd\n", crypte);
+        }
 
         bytes_read += c_read;
         ++block_read;
@@ -159,32 +161,35 @@ void random_e(mpz_t phy, int t, gmp_randstate_t r_state, mpz_t e){
 
 }
 
-/*void bezout_rec(mpz_t a, mpz_t b, Valeur r){
-    Valeur v;
-    mpz_t remainder, quotient;
-
-    mpz_init(remainder);
-    mpz_init(v.first);
-    mpz_init(v.second);
-    mpz_init(quotient);
-
-    mpz_divmod(quotient,remainder,a,b);
-
-    if ( mpz_cmp_ui(remainder, 0) == 0){
-        mpz_init_set_str (v.first, "0", 10);
-        mpz_init_set_str (v.second, "1", 10);
-    } else {
-        int q = a / b;
-        v = bezout_rec(b, r);
-        return make_pair(v.second, v.first-v.second*q);
+void bezout_rec(mpz_t a, mpz_t b, Valeur returned){
+    Valeur uv;
+    mpz_t r,q;
+    mpz_init(r);
+    mpz_init(uv.first);
+    mpz_init(uv.second);
+    mpz_init(q);
+    mpz_tdiv_qr(q,r,a,b);
+    if(mpz_cmp_ui(r,0)==0){
+        mpz_set_str(returned.first,"0",10);
+        mpz_set_str(returned.second,"1",10);
+    } else{
+        bezout_rec(b,r,uv);
+        mpz_set(returned.first,uv.second);
+        mpz_mul(r,q,uv.second);
+        mpz_sub(r,r,uv.first);
+        mpz_set(returned.second,r);
     }
+    mpz_clears(r,q,NULL);
+
+
 }
 
-void inverse_modulaire(mpz_t a, mpz_t n, mpz_t r){
-    bezout_rec(a, n, r);
-    mpz_add(r,r.first,n);
-    mpz_mod(r,r,n);
-   // (bezout_rec(a, n).first+n);//%n;
-}*/
+void inverse_modulaire(mpz_t a, mpz_t n, mpz_t returned){
+    Valeur r;
+    bezout_rec(a,n,r);
+    mpz_set(returned,r.first);
+    mpz_add(returned,returned, n);
+    mpz_mod(returned,returned, n);
+}
 
 

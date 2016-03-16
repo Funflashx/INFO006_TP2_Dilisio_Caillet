@@ -15,7 +15,7 @@ int main( int argc, char * argv [] )
         cout << "\t [name].pub " << endl;
         exit(1);
     }
-
+    //
     //string clair = readInput( cin );
 
     string line = "";
